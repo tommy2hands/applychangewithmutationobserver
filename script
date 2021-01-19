@@ -1,0 +1,29 @@
+// Load Optimizely Utils
+var utils = window["optimizely"].get("utils");
+// Wait for element to exist in DOM
+utils.waitForElement("element").then(function (elem) {
+    // Mutation Subscriber Function
+    function subscriber(mutations) {
+        mutations.forEach(function (mutation) {
+            mutations.forEach(function (mutation) {
+                // Check if initial change has been altered
+                if (elem.style.display != 'none') {
+                    // Re-apply change
+                    elem.style.display = 'none';
+                }
+                // If the element is no longer changing, disconnect MutationObserver
+                else {
+                    observer.disconnect();
+                }
+            });
+        });
+    };
+    // Set Mutation-Observer options
+    var config = {
+        childList: true,
+        subtree: true,
+    };
+    // Activate Mutation Observer
+    var observer = new MutationObserver(subscriber);
+    observer.observe(elem, config);
+});
